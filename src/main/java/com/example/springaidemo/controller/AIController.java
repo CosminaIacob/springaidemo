@@ -1,6 +1,8 @@
 package com.example.springaidemo.controller;
 
+import com.example.springaidemo.service.AIImageService;
 import com.example.springaidemo.service.AIService;
+import org.springframework.ai.image.Image;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,9 +14,13 @@ public class AIController {
 
     private final AIService aiService;
 
-    public AIController(AIService aiService) {
+    private final AIImageService imageService;
+
+    public AIController(AIService aiService, AIImageService imageService) {
         this.aiService = aiService;
+        this.imageService = imageService;
     }
+
 
     @GetMapping("/joke")
     public String getJoke(@RequestParam String topic) {
@@ -24,6 +30,11 @@ public class AIController {
     @GetMapping("/books")
     public String getBook(@RequestParam String category, @RequestParam String year) {
         return aiService.getBooks(category, year);
+    }
+
+    @GetMapping("/image")
+    public Image getImage() {
+        return imageService.getImage();
     }
 
 }

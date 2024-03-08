@@ -25,11 +25,10 @@ public class AIService {
 
     public String getBooks(String category, String year) {
         PromptTemplate template = new PromptTemplate("""
-                Please provide me the best book for the given {category} and the {year}.
-                Please do provide a summary of the book as well, the information should be
-                limited and not much in depth. If you don't find any book for the provided {category} don't change it and 
-                return empty response.
-                 Please provide the details in the JSOn format
+                Please provide me a book from category {category} and year {year}.
+                Provide a summary of the book as well, in 1 sentence.
+                If there is no book with the requested category, return a empty string.
+                Provide the details of the book in the JSON format
                 containing this information: title, author, category, year, review, summary.
                 """);
         template.add("category", category);
